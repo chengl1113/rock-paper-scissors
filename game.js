@@ -48,43 +48,53 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(){
-    let playerScore = 0;
-    let computerScore = 0;
-    let playerSelection;
+function game(playerSelection){
     let computerSelection;
     let result;
-    let round = 1;
-    for (let i = 0; i < 5; i++){
-        playerSelection = prompt("Enter your selection: rock, paper, or scissors");
+    const container = document.querySelector('#container');
+    //for (let i = 0; i < 5; i++){
         computerSelection = computerPlay();
         result = playRound(playerSelection, computerSelection);
+        const content = document.createElement('div');
+        content.classList.add('content');
         switch (result) {
             case ('win'):
                 playerScore++;
-                console.log(`Round ${round} : you chose ${playerSelection}
+                content.textContent = `Round ${round} : you chose ${playerSelection}
                 You won! ${playerSelection} beats ${computerSelection}
                 Player score: ${playerScore}
-                Computer score: ${computerScore}`);
+                Computer score: ${computerScore}`;
+                container.appendChild(content);
                 round++;
                 break;
             case ('lose'):
-                computerScore++;
-                console.log(`Round ${round} : you chose ${playerSelection}
-                You lost! ${computerSelection} beats ${playerSelection}
-                Player score: ${playerScore}
-                Computer score: ${computerScore}`);
+                computerScore++;            
+                content.textContent = `Round ${round} : \nyou chose ${playerSelection}
+                You lost! ${computerSelection} beats ${playerSelection} 
+                Player score: ${playerScore} 
+                Computer score: ${computerScore}`;
+                container.appendChild(content);
                 round++;
                 break;
             case ('tie'):
-                console.log(`Round ${round} : you chose ${playerSelection}
+                content.textContent = `Round ${round} : you chose ${playerSelection}
                 You tied! ${playerSelection} ties with ${computerSelection}
                 Player score: ${playerScore}
-                Computer score: ${computerScore}`);
+                Computer score: ${computerScore}`;
+                container.appendChild(content);
                 round++;
                 break;
         }
-    }
+    //}
 }
 
+let buttons = document.querySelectorAll("button");
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        game(button.outerText);
+    })
+});
+let round = 1;
+let playerScore = 0;
+let computerScore = 0;
 game();

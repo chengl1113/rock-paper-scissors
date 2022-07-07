@@ -51,37 +51,35 @@ function playRound(playerSelection, computerSelection){
 function game(playerSelection){
     let computerSelection;
     let result;
-    const container = document.querySelector('#container');
-    //for (let i = 0; i < 5; i++){
         computerSelection = computerPlay();
         result = playRound(playerSelection, computerSelection);
-        const content = document.createElement('div');
-        content.classList.add('content');
         switch (result) {
             case ('win'):
                 playerScore++;
-                content.textContent = `Round ${round} : you chose ${playerSelection}
+                scoreDisplay.textContent = `Round ${round} `;
+                content.textContent = `you chose ${playerSelection}
                 You won! ${playerSelection} beats ${computerSelection}
                 Player score: ${playerScore}
                 Computer score: ${computerScore}`;
-                container.appendChild(content);
+                
                 round++;
                 break;
             case ('lose'):
-                computerScore++;            
-                content.textContent = `Round ${round} : \nyou chose ${playerSelection}
+                computerScore++;    
+                scoreDisplay.textContent = `Round ${round} `;       
+                content.textContent = `you chose ${playerSelection}
                 You lost! ${computerSelection} beats ${playerSelection} 
                 Player score: ${playerScore} 
                 Computer score: ${computerScore}`;
-                container.appendChild(content);
                 round++;
                 break;
             case ('tie'):
-                content.textContent = `Round ${round} : you chose ${playerSelection}
+                scoreDisplay.textContent = `Round ${round} `;
+                content.textContent = `you chose ${playerSelection}
                 You tied! ${playerSelection} ties with ${computerSelection}
                 Player score: ${playerScore}
                 Computer score: ${computerScore}`;
-                container.appendChild(content);
+
                 round++;
                 break;
         }
@@ -97,4 +95,9 @@ buttons.forEach(button => {
 let round = 1;
 let playerScore = 0;
 let computerScore = 0;
+const container = document.querySelector('#container');
+const content = document.createElement('div');
+content.classList.add('content');
+container.appendChild(content);
+const scoreDisplay = document.querySelector('.score');
 game();
